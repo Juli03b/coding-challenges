@@ -1,4 +1,5 @@
-from typing import List, Optional
+# LINK TO LEETCODE: https://leetcode.com/problems/reverse-linked-list/
+from typing import Optional
 
 # Definition for singly-linked list.
 class ListNode:
@@ -54,7 +55,6 @@ def reverseListNoob(head: Optional[ListNode]) -> Optional[ListNode]:
         current_node = current_node.next
 
     for val in list_values[-1::-1]:
-        print(val)
         reversed_list.val = val
         next_node = ListNode()
         reversed_list.next = next_node
@@ -74,6 +74,7 @@ def reverseListIterative(head: Optional[ListNode]) -> Optional[ListNode]:
             next_node = current_node.next
             current_node.next = prev_node
             prev_node = current_node
+            current_node = next_node
         return head
 
     Example 1:
