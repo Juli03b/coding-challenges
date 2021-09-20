@@ -1,6 +1,5 @@
 from typing import List
 
-
 def countUniqueValues(lst: List) -> int:
     """
     Implement a function, countUniqueValues, which accepts a sorted array, and counts unique values in array.
