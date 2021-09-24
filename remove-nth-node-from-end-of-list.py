@@ -1,7 +1,7 @@
 # Link to LeetCode: https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 
 from data_structures.singly_linked_list import ListNode
-from helper_functions.list_to_linked_list import list_to_linked_list
+from helper_functions.list_to_singly_linked_list import list_to_linked_list
 from typing import Optional
 
 def removeNthFromEnd(head: Optional[ListNode], n: int) -> Optional[ListNode]:
