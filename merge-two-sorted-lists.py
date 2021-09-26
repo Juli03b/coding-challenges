@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional
 from data_structures.singly_linked_list import ListNode
 from helper_functions.list_to_singly_linked_list import list_to_singly_linked_list
 
