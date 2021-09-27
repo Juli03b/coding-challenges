@@ -22,6 +22,7 @@ def tribonacci(n: int) -> int:
         Output: 1389537
     """
     if n == 0: return 0
+    if n == 1: return 1
 
     fib_nums = [0] * (n * 3)
     
