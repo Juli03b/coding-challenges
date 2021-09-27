@@ -22,6 +22,36 @@ def mergeTwoLists(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[Li
         Input: l1 = [], l2 = [0]
         Output: [0]
     """
+    if not l1 and not l2: return l1
+    if not l1 and l2: return l2
+    if not l2 and l1: return l1
+    if not l1.next:
+        if l1.val < l2.val:
+            l1.next = l2
+            return l1
+        elif l1.val > l2.val:
+            l2.next = l1
+            return l2
+    elif not l2.next:
+        current_l1_node = l1
+        # Go to end of list
+        while current_l1_node.next:
+            current_l1_node = current_l1_node.next
+        
+        if l1.val < l2.val:
+            current_l1_node = l1
+
+            # Go to end of list
+            while current_l1_node.next:
+                current_l1_node = current_l1_node.next
+            
+            current_l1_node.next = l2
+
+            return l1
+        elif l1.val > l2.val:
+            l2.next = l1
+            return l2
+
     merged_list_head = None
     merged_list = merged_list_head
     l1_current_node = l1
@@ -29,31 +59,31 @@ def mergeTwoLists(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[Li
 
     while l1_current_node and l2_current_node:
         if l1_current_node.val == l2_current_node.val:
-            print("SAMEL", "l1",l1_current_node, "l2",l2_current_node)
-            new_nodes = ListNode(l1_current_node.val, ListNode(l2_current_node.val))
-            
-            merged_list.next = new_nodes
-            merged_list = new_nodes.next
-            print("mergedd", merged_list)
-            l2_current_node = l2_current_node.next
-            l1_current_node = l1_current_node.next
 
+            if merged_list:
+                merged_list.next = l1_current_node
+            else:
+                merged_list_head = l1_current_node 
+
+            merged_list = l1_current_node
+            l1_current_node = l1_current_node.next
+                
         elif l1_current_node.val > l2_current_node.val:
-            print("l1 is more:", l1_current_node)
-            print("mergedd", merged_list)
             merged_list.next = l2_current_node
             merged_list = l2_current_node
             l2_current_node = l2_current_node.next
 
         elif l1_current_node.val < l2_current_node.val:
-            print("l1 is less:", l1_current_node)
-            print("mergedd", merged_list)
             merged_list.next = l1_current_node
             merged_list = l1_current_node
             l1_current_node = l1_current_node.next
-        print("CURRENT MERGERD SHIT", merged_list_head)
 
-    print(merged_list)
+    if l1_current_node:
+        merged_list.next = l1_current_node
+    elif l2_current_node:
+        merged_list.next = l2_current_node
+
     return merged_list_head
-print(mergeTwoLists(ListNode(), list_to_singly_linked_list([0])))
-# print(mergeTwoLists(list_to_singly_linked_list([1,2,4]), list_to_singly_linked_list([1,3,4])))
+
+# print(mergeTwoLists(ListNode(), list_to_singly_linked_list([0])))
+print(mergeTwoLists(list_to_singly_linked_list([3]), list_to_singly_linked_list([1])))
