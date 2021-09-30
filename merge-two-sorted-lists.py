@@ -26,29 +26,38 @@ def mergeTwoLists(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[Li
     if not l1 and l2: return l2
     if not l2 and l1: return l1
     if not l1.next:
-        if l1.val < l2.val:
+        current_l2_node = l2
+
+        # Go to end of list
+        while current_l2_node.next:
+            if current_l2_node.next.val > l1.val:
+                break
+            current_l2_node = current_l2_node.next
+        
+        if l1.val < current_l2_node.val:
             l1.next = l2
             return l1
-        elif l1.val > l2.val:
+        elif l1.val > current_l2_node.val:
+            l2.next = l1
+            l2_next = l2.next
+            l1.next = l2_next
             l2.next = l1
             return l2
     elif not l2.next:
         current_l1_node = l1
+
         # Go to end of list
         while current_l1_node.next:
+            if current_l1_node.next.val > l2.val:
+                break
             current_l1_node = current_l1_node.next
-        
-        if l1.val < l2.val:
-            current_l1_node = l1
 
-            # Go to end of list
-            while current_l1_node.next:
-                current_l1_node = current_l1_node.next
-            
+        if current_l1_node.val < l2.val:
             current_l1_node.next = l2
-
             return l1
-        elif l1.val > l2.val:
+        elif current_l1_node.val > l2.val:
+            l2_next = l2.next
+            l1.next = l2_next
             l2.next = l1
             return l2
 
@@ -86,4 +95,4 @@ def mergeTwoLists(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[Li
     return merged_list_head
 
 # print(mergeTwoLists(ListNode(), list_to_singly_linked_list([0])))
-print(mergeTwoLists(list_to_singly_linked_list([3]), list_to_singly_linked_list([1])))
+print(mergeTwoLists(list_to_singly_linked_list([0, 2, 4, 9]), list_to_singly_linked_list([0, 2, 4, 9])))
